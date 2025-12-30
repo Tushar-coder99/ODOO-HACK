@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { API_URL } from '../api'; // IMPORT THE API URL
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ const AdminDashboard = () => {
 
   const fetchProducts = async () => {
     try {
-        const res = await fetch('/api/products');
+        const res = await fetch(`${API_URL}/products`); // USE API_URL
         const data = await res.json();
         setProducts(data);
     } catch (error) {
@@ -36,7 +37,7 @@ const AdminDashboard = () => {
 
   const fetchOrders = async () => {
     try {
-        const res = await fetch('/api/orders');
+        const res = await fetch(`${API_URL}/orders`); // USE API_URL
         const data = await res.json();
         setOrders(data);
     } catch (error) {
@@ -46,14 +47,14 @@ const AdminDashboard = () => {
 
   const handleDeleteProduct = async (id) => {
     if (window.confirm('Are you sure you want to delete this product?')) {
-        await fetch(`/api/products/${id}`, { method: 'DELETE' });
+        await fetch(`${API_URL}/products/${id}`, { method: 'DELETE' }); // USE API_URL
         fetchProducts(); 
     }
   };
 
   const handleCreateProduct = async (e) => {
     e.preventDefault();
-    await fetch('/api/products', {
+    await fetch(`${API_URL}/products`, { // USE API_URL
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newProduct)
