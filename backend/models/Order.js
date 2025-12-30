@@ -13,8 +13,14 @@ const orderSchema = mongoose.Schema({
   ],
   shippingAddress: { type: String, required: true },
   totalPrice: { type: Number, required: true },
+  
+  // Payment Status
   isPaid: { type: Boolean, required: true, default: false },
   paidAt: { type: Date },
+
+  // New Delivery Status
+  isDelivered: { type: Boolean, required: true, default: false },
+  deliveredAt: { type: Date },
 }, {
   timestamps: true,
 });
